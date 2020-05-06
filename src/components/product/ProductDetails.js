@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './product.css';
-// import SimilarProducts from './SimilarProducts';
+import SimilarProducts from './SimilarProducts';
 
 export class ProductDetails extends Component {
     render() {
@@ -76,7 +76,7 @@ export class ProductDetails extends Component {
                         </div>
                     </div>
                 </section>
-                {/* <SimilarProducts /> */}
+                <SimilarProducts productData={this.props.productData} />
             </div>
             
         )

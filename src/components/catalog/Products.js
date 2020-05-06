@@ -7,18 +7,26 @@ import Sidebar from './Sidebar';
 class Products extends Component {
     render() {
         const productItems = this.props.productData.map(product => (
-            <Link to='/productDetails'>
+            
                 <div className="product-card" key={product.id}>
+                <Link to='/productDetails'>
                     <img src={product.img} alt="Chocolates" />
                     <p>{product.name}</p>
-                    <span>${product.price}</span>
+                </Link>
+                    <div className="buy-product">
+                        <span>${product.price}</span>
+                        <button>Add to Cart</button>
+                    </div>
                 </div>
-            </Link>
         ))
         return(
             <section className="homepage">
-                <Filters />
+                <Filters productData={this.props.productData}
+                handleChangeSort={this.props.handleChangeSort} sort={this.props.sort} 
+                handleChangeFilter={this.props.handleChangeFilter} filter={this.props.filter} />
+
                 <Sidebar />
+
                 <div className="explored-results">
                     {productItems}
                 </div>
