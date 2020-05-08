@@ -13,7 +13,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 2,
             "img": "images/choco-2.jpg",
@@ -28,7 +31,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":true,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 3,
             "img": "images/choco-3.jpg",
@@ -43,7 +49,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 4,
             "img": "images/choco-4.jpg",
@@ -58,7 +67,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 5,
             "img": "images/choco-5.jpg",
@@ -73,7 +85,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 6,
             "img": "images/choco-6.jpg",
@@ -88,7 +103,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 7,
             "img": "images/choco-7.jpg",
@@ -103,7 +121,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 8,
             "img": "images/choco-8.jpg",
@@ -118,7 +139,10 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
+            "isFreeShipping": true,
+            "inCart":false,
+            "review": "images/review.png",
+            "tick": "images/tick.png"
         },
         {  "id": 9,
             "img": "images/choco-9.jpg",
@@ -133,24 +157,8 @@
             "speciality1":"Your Beloved on Valentine",
             "speciality2":"Your Sister on a special Ocassion",
             "speciality3":"Your kids on Birthdays",
-            "isFreeShipping": true
-        }
-    ],
-    "productDetail": [
-        {  "id": 1,
-            "img": "images/choco-1.jpg",
-            "name":"Amul Ecuador Dark Chocolate",
-            "description":"Filled with rich cocoa, cashews and hazlenuts with very limited added sweetners- this new Amul Ecuador Dark Chocolate is a perfect delight for anyone who is looking for some new & exquisite flavour to savour",
-            "gender": ["kids", "female"],
-            "price": 11.99,
-            "type":"chocolate",
-            "brand":"Amul",
-            "weight": 300,
-            "contents":"Dark Chocolate, Hazlenuts, Cashews, Cocoa Powder",
-            "speciality1":"Your Beloved on Valentine",
-            "speciality2":"Your Sister on a special Ocassion",
-            "speciality3":"Your kids on Birthdays",
             "isFreeShipping": true,
+            "inCart":false,
             "review": "images/review.png",
             "tick": "images/tick.png"
         }

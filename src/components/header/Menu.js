@@ -19,7 +19,7 @@ class Menu extends Component {
                 <div className="cart">
                     <img src={cart} alt="Shopping Cart" />
                     <span><NavLink to='/cart'></NavLink>Cart:</span>
-                    <span>4</span>
+                    <span>{this.props.cartItems.length}</span>
                 </div>
                 <div className="user-profile">
                     <img src={profile} alt="Profile" />

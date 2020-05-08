@@ -8,31 +8,50 @@ import ProductDetails from './components/product/ProductDetails';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { productData: [], filteredProducts: [], productDetail: [] }
+    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [] }
+    this.handleDetail = this.handleDetail.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
     this.handleChangeSort = this.handleChangeSort.bind(this);
   }
   async componentDidMount() {
-    const [response1, response2] = await Promise.all([
-      fetch('http://localhost:8000/productCatalog'),
-      fetch('http://localhost:8000/productDetail')
-    ]);
-    const 
-    data1 = await response1.json(),
-    data2 = await response2.json();
+    const response = await fetch('http://localhost:8000/productCatalog')
+    const data = await response.json()
 
     this.setState({
-      productData: data1,
-      filteredProducts: data1,
-      productDetail: data2
+      productData: data,
+      filteredProducts: data,
     })
   }
+  handleDetail = (e, product) => {
+    this.setState({productDetail: product})
+  }
+  handleAddToCart = (e, product) => {
+    this.setState(state => {
+      const cartItems = state.cartItems;
+      cartItems.forEach(item => {
+        if(item.id === product.id) {
+          state.productData.inCart = true
+          item.count++;
+        }
+      });
+      if(!state.productData.inCart) {
+        cartItems.push({...product, count:1});
+      }
+      // localStorage.setItem("cartItems", JSON.stringify(cartItems))
+      // return cartItems;
+    })
+    console.log(this.state.cartItems.length)
+  }
+  handleRemoveFromCart = () => {
+    console.log('added')
+  }
 
-  handleChangeSort(e) {
+  handleChangeSort = (e) => {
     this.setState({sort: e.target.value})
     this.filteredResults();
   }
-  handleChangeFilter(e) {
+  handleChangeFilter = (e) => {
     this.setState({filter: e.target.value})
     this.filteredResults();
   }
@@ -60,10 +79,12 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Menu />
+        <Menu cartItems={this.state.cartItems}/>
         <Switch>
-          <Route exact path='/' render={props => (<Products productData={this.state.filteredProducts} sort={this.state.sort} filter={this.state.filter}
-           handleChangeFilter={this.handleChangeFilter} handleChangeSort={this.handleChangeSort} />)} />
+          <Route exact path='/' render={props => (<Products productData={this.state.filteredProducts}
+          handleDetail={this.handleDetail} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}
+          sort={this.state.sort} filter={this.state.filter}
+          handleChangeFilter={this.handleChangeFilter} handleChangeSort={this.handleChangeSort} />)} />
           <Route path='/productDetails' render={props => (<ProductDetails productDetail={this.state.productDetail} productData={this.state.productData} />)} />
           {/* <Route path='/cart' render={props => (<Cart productData={this.state.productData} />)} /> */}
         </Switch>

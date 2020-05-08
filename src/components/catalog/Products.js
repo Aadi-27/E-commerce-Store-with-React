@@ -8,15 +8,25 @@ class Products extends Component {
     render() {
         const productItems = this.props.productData.map(product => (
             
-                <div className="product-card" key={product.id}>
-                <Link to='/productDetails'>
-                    <img src={product.img} alt="Chocolates" />
-                    <p>{product.name}</p>
-                </Link>
-                    <div className="buy-product">
-                        <span>${product.price}</span>
-                        <button>Add to Cart</button>
+                <div className="product-card" key={product.id} >
+                <Link to='/productDetails' >
+                    <div className="detail-link" data-id={product.id}>
+                        <img src={product.img} alt="Chocolates"
+                        onClick={(e) => this.props.handleDetail(e, product)}
+                        />
+                        <p onClick={(e) => this.props.handleDetail(e, product)}>{product.name}</p>
                     </div>
+                </Link>
+                    <span>${product.price}</span>
+                    <button className="cart-btn"
+                    disabled={product.inCart ? true : false}
+                    onClick={(e) => this.props.handleAddToCart(e, product)}>
+                    {product.inCart ? (
+                        <p className="inCart-text" disabled>In Cart</p>
+                    ) : (
+                        <i className="fas fa-cart-plus"></i>
+                    )}
+                    </button>
                 </div>
         ))
         return(

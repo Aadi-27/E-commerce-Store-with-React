@@ -4,7 +4,7 @@ import SimilarProducts from './SimilarProducts';
 
 export class ProductDetails extends Component {
     render() {
-        const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail[0]
+        const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail
         return (
             <div className="contain">
                 <section className="product-details" key={id}>

@@ -4,7 +4,7 @@ import './product.css';
 class SimilarProducts extends Component {
     render() {
         const productItems = this.props.productData.map(item => (
-            <div className="card">
+            <div className="card" key={item.id}>
                 <img src={item.img} alt=""/>
             </div>
         ))
