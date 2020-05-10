@@ -10,22 +10,20 @@ class Products extends Component {
                 <div className="product-card" key={product.id} >
                 <Link to='/productDetails' >
                     <div className="detail-link" onClick={(e) => this.props.handleDetail(e, product)}>
-                        <img src={product.img} alt="Chocolates"
-                        
-                        />
-                        <p >{product.name}</p>
+                        <img src={product.img} alt="Chocolates"/>
+                        <p>{product.name}</p>
                     </div>
                 </Link>
                     <span>${product.price}</span>
                     <button className="cart-btn"
                     // disabled={this.props.inCart ? true : false}
                     onClick={(e) => this.props.handleAddToCart(e, product)}>
-                    <i className="fas fa-cart-plus"></i>
-                    {/* {this.props.inCart ? (
+                    {/* <i className="fas fa-cart-plus"></i> */}
+                    {this.props.inCart ? (
                         <p className="inCart-text" disabled>In Cart</p>
                     ) : (
                         <i className="fas fa-cart-plus"></i>
-                    )} */}
+                    )}
                     </button>
                 </div>
         ))

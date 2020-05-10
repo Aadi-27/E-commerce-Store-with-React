@@ -16,7 +16,7 @@ class Menu extends Component {
                 <label>
                     <input type="text" placeholder="Search for gift-items" className="input-items" />
                 </label>
-                <div className="cart">
+                <div className="cart"  onClick={(e) => this.props.toggleCartShow(e)}>
                     <img src={cart} alt="Shopping Cart" />
                     <span><NavLink to='/cart'></NavLink>Cart:</span>
                     <span>{this.props.cartItems.length}</span>

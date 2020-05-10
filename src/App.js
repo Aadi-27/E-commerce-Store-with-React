@@ -8,9 +8,12 @@ import Cart from './components/cart/Cart';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], count: 1 }
+    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], count: 1, isCartVisible: false}
     this.handleDetail = this.handleDetail.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+    this.toggleCartShow = this.toggleCartShow.bind(this);
+    this.toggleCartHide = this.toggleCartHide.bind(this);
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
     this.handleChangeSort = this.handleChangeSort.bind(this);
   }
@@ -44,12 +47,19 @@ class App extends Component {
       // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
       // return state.cartItems;
     })
-    console.log(this.state.cartItems)
-    console.log(this.state.count)
-
   }
-  handleRemoveFromCart = () => {
-    console.log('added')
+  handleRemoveFromCart = (e, item) => {
+    this.setState(state => ({
+        cartItems: state.cartItems.filter(a => a.id !== item.id)
+    }));
+  }
+  toggleCartShow = (e) => {
+    this.setState(state => ({
+      isCartVisible: !state.isCartVisible}));
+  }
+  toggleCartHide = (e) => {
+    this.setState(state => ({
+      isCartVisible: !state.isCartVisible}));
   }
 
   handleChangeSort = (e) => {
@@ -84,15 +94,16 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Menu cartItems={this.state.cartItems}/>
-        <Cart cartItems={this.state.cartItems}/>
+        <Menu cartItems={this.state.cartItems} toggleCartShow={this.toggleCartShow}/>
+        <Cart cartItems={this.state.cartItems} isCartVisible={this.state.isCartVisible} toggleCartHide={this.toggleCartHide} handleRemoveFromCart={this.handleRemoveFromCart}/>
         <Switch>
           <Route exact path='/' render={props => (<Products productData={this.state.filteredProducts}
           handleDetail={this.handleDetail} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}
-          sort={this.state.sort} filter={this.state.filter}
+          sort={this.state.sort} filter={this.state.filter} inCart={this.state.inCart}
           handleChangeFilter={this.handleChangeFilter} handleChangeSort={this.handleChangeSort} />)} />
           
-          <Route path='/productDetails' render={props => (<ProductDetails productDetail={this.state.productDetail} productData={this.state.productData} />)} />
+          <Route path='/productDetails' render={props => (<ProductDetails productDetail={this.state.productDetail} productData={this.state.productData}
+          handleAddToCart={this.handleAddToCart} />)} />
         </Switch>
       </BrowserRouter>
     )

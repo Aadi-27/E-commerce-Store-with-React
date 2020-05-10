@@ -5,6 +5,7 @@ import SimilarProducts from './SimilarProducts';
 export class ProductDetails extends Component {
     render() {
         const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail
+        const product = this.props.productDetail;
         return (
             <div className="contain">
                 <section className="product-details" key={id}>
@@ -31,7 +32,7 @@ export class ProductDetails extends Component {
                             <span className="price-tag">${price}</span>
                         </div>
                         <div className="delivery">
-                            <button className="add">Add To Cart</button>
+                            <button className="add" onClick={(e) => this.props.handleAddToCart(e, product)}>Add To Cart</button>
                             <button className="buy">Buy Now</button>
                         </div>
                         <div className="quantity-selector">
@@ -76,7 +77,7 @@ export class ProductDetails extends Component {
                         </div>
                     </div>
                 </section>
-                <SimilarProducts productData={this.props.productData} />
+                <SimilarProducts productData={this.props.productData} handleAddToCart={this.props.handleAddToCart}/>
             </div>
             
         )

@@ -4,13 +4,14 @@ import cartLogo from '../../logos/cart-white.png';
 
 export class Cart extends Component {
     render() {
+        const isCartVisible = this.props.isCartVisible;
         const cartItem = this.props.cartItems;
         const renderItems = cartItem.map(item => (
             <li key={item.id}>
                 <div className="cart-item-card">
                     <div className="left-part">
                         <img src={item.img} alt="gift item"/>
-                        <span>${item.price}</span>
+                        <span>{item.price}</span>
                     </div>
                     <div className="right-part">
                         <div className="item-info">
@@ -18,7 +19,9 @@ export class Cart extends Component {
                                 <p className="cart-item-name">{item.name}</p>
                             </a>
                         </div>
-                        <span id="cancel-item">X</span>
+                        <div id={item.id} className="cancel-item" onClick={(e) => this.props.handleRemoveFromCart(e, item)}>
+                            <span>X</span>
+                        </div>
                         <div className="cart-item-qty">
                             <p>Qty :</p>
                             <div className="qty-selector">
@@ -32,11 +35,11 @@ export class Cart extends Component {
             </li>
         ))
         return (
-            <div className="shopping-cart">
+            <div className={`cart-hidden ${isCartVisible ? "shopping-cart" : ""}`}>
                 <div className="cart-header">
                     <img src={cartLogo} alt="cart"/>
                     <p>Cart(<span id="cart-total-count">{cartItem.length}</span> items)</p>
-                    <span id="close-cart">X</span>
+                    <span id="close-cart" onClick={(e) => this.props.toggleCartHide(e)}>X</span>
                 </div>
                 <div className="cart-body">
                     <div className="cart-list-wrapper">
@@ -48,7 +51,7 @@ export class Cart extends Component {
                         <p>
                             Total : <span>$13.69</span>/-
                         </p>
-                        <a href="#">Proceed To Checkout</a>
+                        <button>Proceed To Checkout</button>
                     </div>
                 </div>
             </div>
