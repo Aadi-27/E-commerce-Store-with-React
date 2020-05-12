@@ -4,8 +4,9 @@ import SimilarProducts from './SimilarProducts';
 
 export class ProductDetails extends Component {
     render() {
-        const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail
+        const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail;
         const product = this.props.productDetail;
+        const {selectedProductId, handleAddToCart, countIncrement, countDecrement} = this.props;
         return (
             <div className="contain">
                 <section className="product-details" key={id}>
@@ -32,15 +33,23 @@ export class ProductDetails extends Component {
                             <span className="price-tag">${price}</span>
                         </div>
                         <div className="delivery">
-                            <button className="add" onClick={(e) => this.props.handleAddToCart(e, product)}>Add To Cart</button>
-                            <button className="buy">Buy Now</button>
+                            <button className={`${selectedProductId[product.id] ? "inactive-btn" : "active-btn"}`} 
+                            disabled={selectedProductId[product.id] ? true : false}
+                            onClick={(e) => handleAddToCart(e, product)}>
+                            {selectedProductId[product.id] ? (
+                                "ADDED TO CART"
+                                ):(
+                                "ADD TO CART"
+                            )}
+                            </button>
+                            <button className="active-btn">Buy Now</button>
                         </div>
                         <div className="quantity-selector">
                             <p>Quantity :</p>
                             <div className="quantity-selector-sub">
-                                <button>+</button>
-                                <span>1</span>
-                                <button>-</button>
+                                <button onClick={(e) => countDecrement(e, product)}>-</button>
+                                <span>{product.count}</span>
+                                <button onClick={(e) => countIncrement(e, product)}>+</button>
                             </div>
                         </div>
                         <hr />

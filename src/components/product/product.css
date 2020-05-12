@@ -75,7 +75,7 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-.delivery > button{
+.active-btn{
     border: 1px solid #c0392b;
     border-radius: 10px;
     padding: 10px 20px;
@@ -86,9 +86,19 @@ body{
     transition: 0.3s;
     color: #c0392b;
 }
-.delivery > button:hover{
+.active-btn:hover{
     color: #fff;
     background: #c0392b;
+}
+.inactive-btn{
+    border: 1px solid #c0392b;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 200px;
+    background: #c0392b;
+    font-size: 18px;
+    cursor: pointer;
+    color: #fff;
 }
 .quantity-selector{
     display: flex;
@@ -173,6 +183,10 @@ body{
 .card > img{
     width: 100%;
     height: 250px;
+}
+.card > span{
+    color: #c0392b;
+    font-size: 18px;
 }
 .card:hover{
     box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.38),0 6px 12px 0 rgba(0, 0, 0, 0.39);

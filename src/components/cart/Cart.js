@@ -5,29 +5,29 @@ import cartLogo from '../../logos/cart-white.png';
 export class Cart extends Component {
     render() {
         const isCartVisible = this.props.isCartVisible;
-        const cartItem = this.props.cartItems;
-        const renderItems = cartItem.map(item => (
-            <li key={item.id}>
+        const { cartItems, handleRemoveFromCart, countIncrement, countDecrement, total } = this.props;
+        const renderItems = cartItems.map(product => (
+            <li key={product.id}>
                 <div className="cart-item-card">
                     <div className="left-part">
-                        <img src={item.img} alt="gift item"/>
-                        <span>{item.price}</span>
+                        <img src={product.img} alt="gift item"/>
+                        <span>${product.price}</span>
                     </div>
                     <div className="right-part">
                         <div className="item-info">
-                            <a href={`#${item.id}`} target="_blank" rel="noopener noreferrer">
-                                <p className="cart-item-name">{item.name}</p>
+                            <a href={`#${product.id}`} target="_blank" rel="noopener noreferrer">
+                                <p className="cart-item-name">{product.name}</p>
                             </a>
                         </div>
-                        <div id={item.id} className="cancel-item" onClick={(e) => this.props.handleRemoveFromCart(e, item)}>
+                        <div id={product.id} className="cancel-item" onClick={(e) => handleRemoveFromCart(e, product)}>
                             <span>X</span>
                         </div>
                         <div className="cart-item-qty">
                             <p>Qty :</p>
                             <div className="qty-selector">
-                                <button>+</button>
-                                <span>1</span>
-                                <button>-</button>
+                                <button onClick={(e) => countDecrement(e, product)}>-</button>
+                                <span>{product.count}</span>
+                                <button onClick={(e) => countIncrement(e, product)}>+</button>
                             </div>
                         </div>
                     </div> 
@@ -38,7 +38,7 @@ export class Cart extends Component {
             <div className={`cart-hidden ${isCartVisible ? "shopping-cart" : ""}`}>
                 <div className="cart-header">
                     <img src={cartLogo} alt="cart"/>
-                    <p>Cart(<span id="cart-total-count">{cartItem.length}</span> items)</p>
+                    <p>Cart(<span id="cart-total-count">{cartItems.length}</span> items)</p>
                     <span id="close-cart" onClick={(e) => this.props.toggleCartHide(e)}>X</span>
                 </div>
                 <div className="cart-body">
@@ -49,7 +49,7 @@ export class Cart extends Component {
                     </div>
                     <div className="cart-amount">
                         <p>
-                            Total : <span>$13.69</span>/-
+                            Total: <span>${total} /-</span>
                         </p>
                         <button>Proceed To Checkout</button>
                     </div>

@@ -43,6 +43,7 @@ body{
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 25px;
     margin-right: 3rem;
+    padding-bottom: 3rem;
 }
 .product-card{
     position: relative;

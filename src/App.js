@@ -8,10 +8,12 @@ import Cart from './components/cart/Cart';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], count: 1, isCartVisible: false}
+    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], isCartVisible: false, selectedProductId: [], total: 0 }
     this.handleDetail = this.handleDetail.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+    this.countIncrement = this.countIncrement.bind(this);
+    this.countDecrement = this.countDecrement.bind(this);
     this.toggleCartShow = this.toggleCartShow.bind(this);
     this.toggleCartHide = this.toggleCartHide.bind(this);
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
@@ -30,10 +32,10 @@ class App extends Component {
     this.setState({productDetail: product})
   }
   handleAddToCart = (e, product) => {
-    this.setState({count: this.state.count + 1});
     this.addItems(e, product)
   }
   addItems(e, product) {
+    const {selectedProductId} = this.state;
     let productInCart = false;
     this.setState(state => {
       state.cartItems.forEach(item => {
@@ -42,16 +44,41 @@ class App extends Component {
         }
       })
       if(!productInCart) {
-        state.cartItems.push({...product, count:1})
+        state.cartItems.push({...product, count: 1})
       }
       // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
       // return state.cartItems;
     })
+    this.setState({
+      selectedProductId: {...selectedProductId, [product.id]: true}
+    })
   }
-  handleRemoveFromCart = (e, item) => {
-    this.setState(state => ({
-        cartItems: state.cartItems.filter(a => a.id !== item.id)
-    }));
+  handleRemoveFromCart = (e, product) => {
+    const {selectedProductId} = this.state;
+    const {cartItems} = this.state;
+    this.setState({
+      cartItems: cartItems.filter(a => a.id !== product.id),
+      selectedProductId: {...selectedProductId, [product.id]: false}
+    });
+  }
+
+  countIncrement = (e, product) => {
+    const {cartItems} = this.state;
+    const index = cartItems.indexOf(product);
+    cartItems[index].count++;
+    this.setState({
+      cartItems: cartItems
+    });
+  }
+  countDecrement = (e, product) => {
+    const {cartItems} = this.state;
+    const index = cartItems.indexOf(product);
+    cartItems[index].count > 1 ?
+    cartItems[index].count-- : 
+    alert('Quantity cannot be zero')
+    this.setState({
+      cartItems: cartItems
+    });
   }
   toggleCartShow = (e) => {
     this.setState(state => ({
@@ -92,18 +119,20 @@ class App extends Component {
     })
   }
   render() {
+    const {cartItems, isCartVisible, filteredProducts, sort, filter, inCart,selectedProductId, total, productDetail, productData} = this.state;
     return (
       <BrowserRouter>
-        <Menu cartItems={this.state.cartItems} toggleCartShow={this.toggleCartShow}/>
-        <Cart cartItems={this.state.cartItems} isCartVisible={this.state.isCartVisible} toggleCartHide={this.toggleCartHide} handleRemoveFromCart={this.handleRemoveFromCart}/>
+        <Menu cartItems={cartItems} toggleCartShow={this.toggleCartShow} />
+        <Cart cartItems={cartItems} isCartVisible={isCartVisible} toggleCartHide={this.toggleCartHide} handleRemoveFromCart={this.handleRemoveFromCart} 
+          total={total} countIncrement={this.countIncrement} countDecrement={this.countDecrement} />
         <Switch>
-          <Route exact path='/' render={props => (<Products productData={this.state.filteredProducts}
+          <Route exact path='/' render={props => (<Products productData={filteredProducts}
           handleDetail={this.handleDetail} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}
-          sort={this.state.sort} filter={this.state.filter} inCart={this.state.inCart}
+          sort={sort} filter={filter} inCart={inCart} selectedProductId={selectedProductId} 
           handleChangeFilter={this.handleChangeFilter} handleChangeSort={this.handleChangeSort} />)} />
           
-          <Route path='/productDetails' render={props => (<ProductDetails productDetail={this.state.productDetail} productData={this.state.productData}
-          handleAddToCart={this.handleAddToCart} />)} />
+          <Route path='/productDetails' render={props => (<ProductDetails productDetail={productDetail} productData={productData}
+          handleAddToCart={this.handleAddToCart} selectedProductId={selectedProductId} countIncrement={this.countIncrement} countDecrement={this.countDecrement} />)} />
         </Switch>
       </BrowserRouter>
     )
