@@ -50,8 +50,6 @@ class App extends Component {
       if(!productInCart) {
         state.cartItems.push({...product, count: 1})
       }
-      // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-      // return state.cartItems;
     }, () => {this.addProdValues(e)});
   }
   addProdValues(e) {
