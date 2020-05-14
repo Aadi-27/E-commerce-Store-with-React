@@ -19,7 +19,7 @@ class Menu extends Component {
                 <div className="cart"  onClick={(e) => this.props.toggleCartShow(e)}>
                     <img src={cart} alt="Shopping Cart" />
                     <span><NavLink to='/cart'></NavLink>Cart:</span>
-                    <span>{this.props.cartItems.length}</span>
+                    <span>{this.props.totalCount}</span>
                 </div>
                 <div className="user-profile">
                     <img src={profile} alt="Profile" />

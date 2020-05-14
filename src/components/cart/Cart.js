@@ -5,7 +5,7 @@ import cartLogo from '../../logos/cart-white.png';
 export class Cart extends Component {
     render() {
         const isCartVisible = this.props.isCartVisible;
-        const { cartItems, handleRemoveFromCart, countIncrement, countDecrement, total } = this.props;
+        const { cartItems, handleRemoveFromCart, countIncrement, countDecrement, totalCount, totalPrice } = this.props;
         const renderItems = cartItems.map(product => (
             <li key={product.id}>
                 <div className="cart-item-card">
@@ -38,7 +38,7 @@ export class Cart extends Component {
             <div className={`cart-hidden ${isCartVisible ? "shopping-cart" : ""}`}>
                 <div className="cart-header">
                     <img src={cartLogo} alt="cart"/>
-                    <p>Cart(<span id="cart-total-count">{cartItems.length}</span> items)</p>
+                    <p>Cart(<span id="cart-total-count">{totalCount}</span> items)</p>
                     <span id="close-cart" onClick={(e) => this.props.toggleCartHide(e)}>X</span>
                 </div>
                 <div className="cart-body">
@@ -49,7 +49,7 @@ export class Cart extends Component {
                     </div>
                     <div className="cart-amount">
                         <p>
-                            Total: <span>${total} /-</span>
+                            Total: <span>${totalPrice} /-</span>
                         </p>
                         <button>Proceed To Checkout</button>
                     </div>

@@ -8,7 +8,7 @@ import Cart from './components/cart/Cart';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], isCartVisible: false, selectedProductId: [], total: 0 }
+    this.state = { productData: [], filteredProducts: [], productDetail: {}, cartItems: [], isCartVisible: false, selectedProductId: [], totalCount: 0, totalPrice: 0 }
     this.handleDetail = this.handleDetail.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
@@ -32,10 +32,14 @@ class App extends Component {
     this.setState({productDetail: product})
   }
   handleAddToCart = (e, product) => {
-    this.addItems(e, product)
+    const {selectedProductId} = this.state;
+    this.addItems(e, product);
+    this.setState({
+      selectedProductId: {...selectedProductId, [product.id]: true}
+    });
+    console.log(this.state.totalPrice)
   }
   addItems(e, product) {
-    const {selectedProductId} = this.state;
     let productInCart = false;
     this.setState(state => {
       state.cartItems.forEach(item => {
@@ -48,10 +52,19 @@ class App extends Component {
       }
       // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
       // return state.cartItems;
-    })
-    this.setState({
-      selectedProductId: {...selectedProductId, [product.id]: true}
-    })
+    }, () => {this.addProdValues(e)});
+  }
+  addProdValues(e) {
+    let totalCounter = 0;
+    let subTotalAmount = 0;
+    this.state.cartItems.map(item => totalCounter += item.count);
+    this.state.cartItems.map(item => subTotalAmount += (item.price * item.count));
+    this.setState(() => {
+      return {
+        totalCount: totalCounter,
+        totalPrice: subTotalAmount
+      }
+    });
   }
   handleRemoveFromCart = (e, product) => {
     const {selectedProductId} = this.state;
@@ -59,9 +72,8 @@ class App extends Component {
     this.setState({
       cartItems: cartItems.filter(a => a.id !== product.id),
       selectedProductId: {...selectedProductId, [product.id]: false}
-    });
+    }, () => {this.addProdValues(e)});
   }
-
   countIncrement = (e, product) => {
     const {cartItems} = this.state;
     const index = cartItems.indexOf(product);
@@ -69,6 +81,7 @@ class App extends Component {
     this.setState({
       cartItems: cartItems
     });
+    this.addProdValues(e);
   }
   countDecrement = (e, product) => {
     const {cartItems} = this.state;
@@ -79,6 +92,8 @@ class App extends Component {
     this.setState({
       cartItems: cartItems
     });
+    this.addProdValues(e);
+    console.log(this.state.totalPrice)
   }
   toggleCartShow = (e) => {
     this.setState(state => ({
@@ -119,12 +134,12 @@ class App extends Component {
     })
   }
   render() {
-    const {cartItems, isCartVisible, filteredProducts, sort, filter, inCart,selectedProductId, total, productDetail, productData} = this.state;
+    const {cartItems, isCartVisible, filteredProducts, sort, filter, inCart,selectedProductId, totalCount, totalPrice, productDetail, productData} = this.state;
     return (
       <BrowserRouter>
-        <Menu cartItems={cartItems} toggleCartShow={this.toggleCartShow} />
+        <Menu cartItems={cartItems} toggleCartShow={this.toggleCartShow} totalCount={totalCount}/>
         <Cart cartItems={cartItems} isCartVisible={isCartVisible} toggleCartHide={this.toggleCartHide} handleRemoveFromCart={this.handleRemoveFromCart} 
-          total={total} countIncrement={this.countIncrement} countDecrement={this.countDecrement} />
+          countIncrement={this.countIncrement} countDecrement={this.countDecrement} totalCount={totalCount} totalPrice={totalPrice} />
         <Switch>
           <Route exact path='/' render={props => (<Products productData={filteredProducts}
           handleDetail={this.handleDetail} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}

@@ -6,7 +6,7 @@ export class ProductDetails extends Component {
     render() {
         const {id, img, name, description, price, type, brand, weight, contents, speciality1, speciality2, speciality3, review, tick} = this.props.productDetail;
         const product = this.props.productDetail;
-        const {selectedProductId, handleAddToCart, countIncrement, countDecrement} = this.props;
+        const {selectedProductId, handleAddToCart} = this.props;
         return (
             <div className="contain">
                 <section className="product-details" key={id}>
@@ -47,9 +47,9 @@ export class ProductDetails extends Component {
                         <div className="quantity-selector">
                             <p>Quantity :</p>
                             <div className="quantity-selector-sub">
-                                <button onClick={(e) => countDecrement(e, product)}>-</button>
+                                {/* <button onClick={(e) => countDecrement(e, product)}>-</button>
                                 <span>{product.count}</span>
-                                <button onClick={(e) => countIncrement(e, product)}>+</button>
+                                <button onClick={(e) => countIncrement(e, product)}>+</button> */}
                             </div>
                         </div>
                         <hr />

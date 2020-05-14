@@ -33,6 +33,9 @@ body{
 .explore-products > ul >li{
     padding: 10px 0;
 }
+.explore-products:hover{
+    cursor: pointer;
+}
 
 /* explored results section styling */
 .explored-results{
