@@ -20,8 +20,9 @@ class App extends Component {
     this.handleChangeSort = this.handleChangeSort.bind(this);
   }
   async componentDidMount() {
-    const response = await fetch('http://localhost:8000/productCatalog')
+    const response = await fetch('/', {method: "get"})
     const data = await response.json()
+    console.log(data);
 
     this.setState({
       productData: data,
