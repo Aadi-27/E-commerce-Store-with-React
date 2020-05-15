@@ -21,7 +21,7 @@ class App extends Component {
   }
   async componentDidMount() {
     const response = await fetch('/', {method: "get"})
-    const data = await response.json()
+    const data = await response.json();
     console.log(data);
 
     this.setState({
