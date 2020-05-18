@@ -7,7 +7,7 @@ export class Cart extends Component {
         const isCartVisible = this.props.isCartVisible;
         const { cartItems, handleRemoveFromCart, countIncrement, countDecrement, totalCount, totalPrice } = this.props;
         const renderItems = cartItems.map(product => (
-            <li key={product.id}>
+            <li key={product._id}>
                 <div className="cart-item-card">
                     <div className="left-part">
                         <img src={product.img} alt="gift item"/>
@@ -15,11 +15,11 @@ export class Cart extends Component {
                     </div>
                     <div className="right-part">
                         <div className="item-info">
-                            <a href={`#${product.id}`} target="_blank" rel="noopener noreferrer">
+                            <a href={`#${product._id}`} target="_blank" rel="noopener noreferrer">
                                 <p className="cart-item-name">{product.name}</p>
                             </a>
                         </div>
-                        <div id={product.id} className="cancel-item" onClick={(e) => handleRemoveFromCart(e, product)}>
+                        <div id={product._id} className="cancel-item" onClick={(e) => handleRemoveFromCart(e, product)}>
                             <span>X</span>
                         </div>
                         <div className="cart-item-qty">

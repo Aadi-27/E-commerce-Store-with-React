@@ -36,7 +36,7 @@ export class ProductDetails extends Component {
                             <button className={`${selectedProductId[product.id] ? "inactive-btn" : "active-btn"}`} 
                             disabled={selectedProductId[product.id] ? true : false}
                             onClick={(e) => handleAddToCart(e, product)}>
-                            {selectedProductId[product.id] ? (
+                            {selectedProductId[product._id] ? (
                                 "ADDED TO CART"
                                 ):(
                                 "ADD TO CART"
@@ -44,14 +44,14 @@ export class ProductDetails extends Component {
                             </button>
                             <button className="active-btn">Buy Now</button>
                         </div>
-                        <div className="quantity-selector">
+                        {/* <div className="quantity-selector">
                             <p>Quantity :</p>
                             <div className="quantity-selector-sub">
-                                {/* <button onClick={(e) => countDecrement(e, product)}>-</button>
-                                <span>{product.count}</span>
-                                <button onClick={(e) => countIncrement(e, product)}>+</button> */}
+                                <button onClick={(e) => countDec(e, product)}>-</button>
+                                <span>{`${product.counter > 1 ? product.counter : "1"}`}</span>
+                                <button onClick={(e) => countInc(e, product)}>+</button>
                             </div>
-                        </div>
+                        </div> */}
                         <hr />
                         <div className="description">
                             <h1>Description</h1>
@@ -86,7 +86,7 @@ export class ProductDetails extends Component {
                         </div>
                     </div>
                 </section>
-                <SimilarProducts productData={this.props.productData} handleAddToCart={this.props.handleAddToCart}/>
+                <SimilarProducts productData={this.props.productData} handleAddToCart={this.props.handleAddToCart} selectedProductId={this.props.selectedProductId}/>
             </div>
             
         )

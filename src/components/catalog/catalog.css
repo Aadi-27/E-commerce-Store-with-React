@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 body{
     padding: 0;
     margin: 0;
@@ -14,6 +15,47 @@ body{
     align-items: center;
     justify-content: space-between;
 }
+.change{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.label{
+    padding-right: 5px;
+}
+select{
+    border: 0;
+    background: transparent;
+    outline: none;
+    appearance: none;
+    box-shadow: none;
+    width: 100%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+.select-prop{
+    display: block;
+    padding: 2px;
+    border: 2px solid #8d8d8d;
+    width: 6.5rem;
+    overflow: hidden;
+}
+#slt-2{
+    width: 10rem;
+}
+.select-prop:hover{
+    border: 2px solid #585858;
+}
+.select-prop:after{
+    content: 'keyboard_arrow_down';
+    font-family: 'Material Icons';
+    color: #808080;
+    position: absolute;
+    right: 8px;
+    pointer-events: none;
+}
+
 /* explored products section styling */
 .explore-products{
     position: fixed;

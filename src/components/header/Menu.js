@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../../logos/gifts1.png';
+import logo from '../../logos/mainlogo1.jpg';
 import cart from '../../logos/cart-black.png';
 import profile from '../../logos/profile.jpg';
 import './header.css';
@@ -11,10 +11,9 @@ class Menu extends Component {
             <header className="menu">
                 <div className="site-logo">
                     <img src = {logo} alt='App Logo'/>
-                    <h2>Memento</h2>
                 </div>
                 <label>
-                    <input type="text" placeholder="Search for gift-items" className="input-items" />
+                    <input type="text" placeholder="Search.." className="input-items" />
                 </label>
                 <div className="cart"  onClick={(e) => this.props.toggleCartShow(e)}>
                     <img src={cart} alt="Shopping Cart" />

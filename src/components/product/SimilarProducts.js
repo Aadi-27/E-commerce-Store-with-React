@@ -3,20 +3,20 @@ import './product.css';
 
 class SimilarProducts extends Component {
     render() {
-        const productItems = this.props.productData.map(product => (
-            <div className="card" key={product.id}>
+        const { productData, selectedProductId } = this.props;
+        const productItems = productData.map(product => (
+            <div className="card" key={product._id}>
                 <img src={product.img} alt=""/>
                 <p>{product.name}</p>
                 <span>${product.price}</span>
                 <button className="cart-button"
-                // disabled={this.props.inCart ? true : false}
+                disabled={selectedProductId[product._id] ? true : false}
                 onClick={(e) => this.props.handleAddToCart(e, product)}>
-                <i className="fas fa-cart-plus"></i>
-                {/* {this.props.inCart ? (
-                    <p className="inCart-text" disabled>In Cart</p>
-                ) : (
-                    <i className="fas fa-cart-plus"></i>
-                )} */}
+                {selectedProductId[product._id] ? (
+                    <p className="inCart-text">ADDED</p>
+                    ):(
+                    <p className="inCart-text">ADD TO CART</p>
+                )}
                 </button>
             </div>
         ))
