@@ -1,4 +1,4 @@
-My Portfolio Project - An Online Gift Store web app with React and Context API.
+My First React App - An Online Gift Store web app with React and Context API.
 
 The Shopping site has following features:
 1. Backend that serves Data which is saved in a Mongodb collection using axios.
