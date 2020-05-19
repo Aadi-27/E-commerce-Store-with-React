@@ -16,7 +16,7 @@ class ProductProvider extends Component {
     };
     componentDidMount() {
         axios
-            .get('http://localhost:4000/')
+            .get('/')
             .then((res) => {
                 this.setState({
                     productData: res.data,
