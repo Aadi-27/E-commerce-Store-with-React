@@ -16,7 +16,7 @@ class ProductProvider extends Component {
     };
     componentDidMount() {
         axios
-            .get('/')
+            .get('https://wrapsy.herokuapp.com/')
             .then((res) => {
                 this.setState({
                     productData: res.data,

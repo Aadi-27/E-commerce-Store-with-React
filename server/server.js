@@ -4,10 +4,19 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const app = express();
 const Product = require('./models/Product');
+const path = require('path');
 
 const PORT = process.env.port || 4000;
 app.use(express.json());
 app.use(cors());
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../build"));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../", "build", "index.html"));
+    });
+}
 
 // Fetches all the data from DB and sends to the client
 app.get('/', async (req, res) => {
