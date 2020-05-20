@@ -10,7 +10,8 @@ class Products extends Component {
         return(
             <ProductConsumer>
                 {(value) => (
-                    <section className="homepage">
+                    value.isLoading ? 'Loading...' : 
+                    (<section className="homepage">
                     <div className="main-view">
                         <Filters productData={value.productData}
                         handleChangeSort={value.handleChangeSort} sort={value.sort} 
@@ -42,7 +43,7 @@ class Products extends Component {
                     </div>
                         <Sidebar />
                     </section>
-                )}
+                ))}
             </ProductConsumer>
         )
     }
