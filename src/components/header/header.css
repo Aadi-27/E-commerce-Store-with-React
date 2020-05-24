@@ -15,11 +15,13 @@ body{
     right: 0;
     height: 80px;
     background: #fff;
+    padding-left: 1rem;
 }
 .site-logo{
     display: flex;
     height: 46px;
     min-width: 220px;
+    max-width: 220px;
 }
 .menu > .site-logo > img {
     height: 100%;
