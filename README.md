@@ -1,4 +1,4 @@
-Wrapsy - An Online Gift Store web app with React and Context API.
+Wrapsy - An Online Gift Store made with React and Context API.
 This repository has the frontend code of the App, the backend code is saved in 
 another repository of mine named "secondapp-backend" and is hosted seperately.
 
